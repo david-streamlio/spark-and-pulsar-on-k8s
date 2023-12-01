@@ -4,38 +4,24 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <name>Spark and Pulsar on Kubernetes</name>
     <groupId>io.streamnative.spark</groupId>
     <artifactId>spark-and-pulsar-on-k8s</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>spark-pi</module>
+        <module>spark-word-count</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <docker.repo>localhost:32000</docker.repo>
+        <spark.version>3.5.0</spark.version>
     </properties>
-
-    <dependencies>
-
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-core_2.12</artifactId>
-            <version>3.2.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-sql_2.12</artifactId>
-            <version>3.2.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.streamnative.connectors</groupId>
-            <artifactId>pulsar-spark-connector_2.12</artifactId>
-            <version>3.2.0.2</version>
-        </dependency>
-
-    </dependencies>
 
     <build>
         <plugins>
@@ -47,42 +33,6 @@
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <!-- To run: mvn docker:build -->
-                <groupId>io.fabric8</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>0.43.0</version>
-                <configuration>
-                    <images>
-                        <image>
-                            <name>${docker.repo}/${project.artifactId}:${project.version}</name>
-                            <build>
-                                <contextDir>${project.basedir}/src/main/docker</contextDir>
-                                <assemblies>
-                                    <assembly>
-                                        <descriptorRef>artifact</descriptorRef>
-                                    </assembly>
-                                </assemblies>
-                                <tags>
-                                    <tag>latest</tag>
-                                </tags>
-                            </build>
-                        </image>
-                    </images>
-                    <registry>${docker.repo}</registry>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>docker:build</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>build</goal>
-                            <goal>push</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

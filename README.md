@@ -16,6 +16,6 @@ Ensure you have allocated enough resources to Kubernetes: at least 16Gb.
 ---
 Application Development Guides
 ---
-- Spark on K8s installation [guide](spark-operator/README.md).
-- Spark & Pulsar application development [guide](development/README.md).
-- Application deployment [guide](deployment/README.md).
+- Spark on K8s installation [guide](docs/spark-operator-guide.md).
+- Spark & Pulsar application development [guide](docs/development-guide.md).
+- Application deployment [guide](docs/deployment-guide.md).

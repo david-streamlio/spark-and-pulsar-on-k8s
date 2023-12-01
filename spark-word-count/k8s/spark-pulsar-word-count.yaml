@@ -1,16 +1,19 @@
+
 apiVersion: "sparkoperator.k8s.io/v1beta2"
 kind: SparkApplication
 metadata:
-  name: pyspark-pi
+  name: spark-pulsar-word-count
   namespace: spark-apps
 spec:
-  type: Python
+  type: Scala
   mode: cluster
-  image: "apache/spark-py:3.5.0"
-  imagePullPolicy: IfNotPresent
-  mainClass: org.apache.spark.examples.SparkPi
-  mainApplicationFile: "local:///opt/spark/examples/src/main/python/pi.py"
+  image: "localhost:32000/spark-word-count:latest"
+  imagePullPolicy: Always
+  mainClass: io.streamnative.demos.connectors.spark.WordCount
+  mainApplicationFile: "local:///opt/spark/examples/jars/spark-word-count-0.0.2.jar"
   sparkVersion: "3.5.0"
+  sparkConf:
+    spark.driver.userClassPath: "true"
   restartPolicy:
     type: Never
   volumes:
