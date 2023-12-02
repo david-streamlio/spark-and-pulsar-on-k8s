@@ -31,7 +31,7 @@
         <dependency>
             <groupId>io.streamnative.connectors</groupId>
             <artifactId>pulsar-spark-connector_2.12</artifactId>
-            <version>3.2.0.2</version>
+            <version>3.4.0.3</version>
         </dependency>
 
     </dependencies>
@@ -47,7 +47,7 @@
                         <image>
                             <name>${docker.repo}/${project.artifactId}:${project.version}</name>
                             <build>
-                                <from>apache/spark:3.5.0</from>
+                                <from>apache/spark:3.4.0</from>
                                 <assemblies>
                                     <assembly>
                                         <name>app-artifact</name>

@@ -43,10 +43,9 @@ public class WordCount {
         StreamingQuery query = wordCounts
                 .writeStream()
                 .outputMode("update") // Change output mode as per your requirement
-                .format("console") // Change to desired sink (e.g., file, Kafka, etc.)
-//                .format("pulsar")
-//                .option("service.url", "pulsar://192.168.1.120:6650")
-//                .option("topic", "persistent://public/default/tweet-word-count")
+                .format("pulsar")
+                .option("service.url", "pulsar://192.168.1.120:6650")
+                .option("topic", "persistent://public/default/tweet-word-count")
                 .trigger(Trigger.ProcessingTime(30000))
                 .start();
 
